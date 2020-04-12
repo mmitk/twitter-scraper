@@ -1,24 +1,16 @@
 import twitter
+import json
 
-f1 = open('access_token.txt','r')
-access_token = f1.readline()
-f1.close()
 
-f2 = open('access_token_secret.txt','r')
-access_token_secret = f2.readline()
-f2.close()
 
-f3 = open('consumer_key.txt','r')
-consumer_key = f3.readline()
-f3.close()
+with open('key.json','r') as f:
+    keys = json.load(f)
 
-f4 = open('consumer_secret.txt','r')
-consumer_secret = f4.readline()
-f4.close()
+api = twitter.Api(consumer_key=keys["consumer key"],
+                  consumer_secret= keys["consumer secret"],
+                  access_token_key= keys["access token"],
+                  access_token_secret= keys["access token secret"])
 
-api = twitter.Api(consumer_key=consumer_key,
-                  consumer_secret= consumer_secret,
-                  access_token_key= access_token,
-                  access_token_secret= access_token_secret)
+results = api.GetSearch(raw_query="q=%24%%20&result_type=recent&since=2014-07-19&count=100")
 
-print(api)
+print(results)
