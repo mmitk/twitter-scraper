@@ -11,6 +11,9 @@ api = twitter.Api(consumer_key=keys["consumer key"],
                   access_token_key= keys["access token"],
                   access_token_secret= keys["access token secret"])
 
-results = api.GetSearch(raw_query="q=%24%%20&result_type=recent&since=2014-07-19&count=100")
+results = api.GetSearch(raw_query="q=%24%%20&result_type=recent&since=2014-07-19&count=100", return_json = True)
+#results = api.getSearch(term = )
 
-print(results)
+#print(results)
+with open('results.json','w+') as fp:
+    json.dump(results, fp)
